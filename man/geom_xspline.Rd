@@ -18,18 +18,28 @@ stat_xspline(mapping = NULL, data = NULL, geom = "line",
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
 \code{\link{aes_}}. If specified and \code{inherit.aes = TRUE} (the
-default), is combined with the default mapping at the top level of the
-plot. You only need to supply \code{mapping} if there isn't a mapping
-defined for the plot.}
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{data}{A data frame. If specified, overrides the default data frame
-defined at the top level of the plot.}
+\item{data}{The data to be displayed in this layer. There are three
+   options:
+
+   If \code{NULL}, the default, the data is inherited from the plot
+   data as specified in the call to \code{\link{ggplot}}.
+
+   A \code{data.frame}, or other object, will override the plot
+   data. All objects will be fortified to produce a data frame. See
+   \code{\link{fortify}} for which variables will be created.
+
+   A \code{function} will be called with a single argument,
+   the plot data. The return value must be a \code{data.frame.}, and
+   will be used as the layer data.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{na.rm}{If \code{FALSE} (the default), removes missing values with
-a warning.  If \code{TRUE} silently removes missing values.}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
+a warning. If \code{TRUE}, missing values are silently removed.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -50,16 +60,10 @@ closed shape.}
 first and last control points should be replicated for drawing the
 curve. Ignored for closed X-splines.}
 
-\item{...}{other arguments passed on to \code{\link{layer}}. There are
-  three types of arguments you can use here:
-
-  \itemize{
-  \item Aesthetics: to set an aesthetic to a fixed value, like
-     \code{color = "red"} or \code{size = 3}.
-  \item Other arguments to the layer, for example you override the
-    default \code{stat} associated with the layer.
-  \item Other arguments passed on to the stat.
-  }}
+\item{...}{other arguments passed on to \code{\link{layer}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{color = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
 
 \item{geom, stat}{Use to override the default connection between
 \code{geom_xspline} and \code{stat_xspline}.}
@@ -73,13 +77,13 @@ first before computing the splines.
 \if{html}{
 A sample of the output from \code{geom_xspline()}:
 
-\figure{geom_xspline_01.png}{options: width="100\%" alt="Figure: geom_xspline_01.png"}
+\figure{geomxspline01.png}{options: width="100\%" alt="Figure: geomxspline01.png"}
 }
 
 \if{latex}{
 A sample of the output from \code{geom_xspline()}:
 
-\figure{geomxspline01.pdf}{options: width=10cm}
+\figure{geomxspline01.png}{options: width=10cm}
 }
 
 
@@ -126,6 +130,7 @@ are in bold):
   \item{y}
 }
 }
+
 \examples{
 set.seed(1492)
 dat <- data.frame(x=c(1:10, 1:10, 1:10),
@@ -185,5 +190,6 @@ Blanc, C. and Schlick, C. (1995), "X-splines : A Spline Model
  \code{\link[ggplot2]{geom_segment}}: Line segments;
  \code{\link[graphics]{xspline}};
  \code{\link[grid]{grid.xspline}}
-}
 
+Other xspline implementations: \code{\link{geom_xspline2}}
+}

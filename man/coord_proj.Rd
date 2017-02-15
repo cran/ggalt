@@ -40,16 +40,18 @@ the \code{proj4} package.
 \if{html}{
 A sample of the output from \code{coord_proj()} using the Winkel-Tripel projection:
 
-\figure{coord_proj_01.png}{options: width="100\%" alt="Figure: coord_proj_01.png"}
+\figure{coordproj01.png}{options: width="100\%" alt="Figure: coordproj01.png"}
 }
 
 \if{latex}{
 A sample of the output from \code{coord_proj()} using the Winkel-Tripel projection:
-
-\figure{coordproj01.pdf}{options: width=10cm}
+``
+\figure{coordproj01.png}{options: width=10cm}
 }
 }
 \note{
+It is recommended that you use \code{geom_cartogram} with this coordinate system
+
 When \code{inverse} is \code{FALSE} \code{coord_proj} makes a fairly
       large assumption that the coordinates being transformed are within
       -180:180 (longitude) and -90:90 (latitude). As such, it truncates
@@ -57,23 +59,15 @@ When \code{inverse} is \code{FALSE} \code{coord_proj} makes a fairly
       to this new \code{coord_} are planned.
 }
 \examples{
-library(maps)
+\dontrun{
 # World in Winkel-Tripel
-world <- map_data("world")
-world <- world[world$region != "Antarctica",]
-
-gg <- ggplot()
-gg <- gg + geom_map(data=world, map=world,
-                    aes(x=long, y=lat, map_id=region))
-gg <- gg + coord_proj("+proj=wintri")
-gg
 
 # U.S.A. Albers-style
 usa <- world[world$region == "USA",]
 usa <- usa[!(usa$subregion \%in\% c("Alaska", "Hawaii")),]
 
 gg <- ggplot()
-gg <- gg + geom_map(data=usa, map=usa,
+gg <- gg + geom_cartogram(data=usa, map=usa,
                     aes(x=long, y=lat, map_id=region))
 gg <- gg + coord_proj(
              paste0("+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96",
@@ -84,11 +78,11 @@ gg
 greenland <- world[world$region == "Greenland",]
 
 gg <- ggplot()
-gg <- gg + geom_map(data=greenland, map=greenland,
+gg <- gg + geom_cartogram(data=greenland, map=greenland,
                     aes(x=long, y=lat, map_id=region))
 gg <- gg + coord_proj(
              paste0("+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +k=1 +x_0=0",
                     " +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
 gg
 }
-
+}

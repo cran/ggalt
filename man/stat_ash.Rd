@@ -11,12 +11,22 @@ stat_ash(mapping = NULL, data = NULL, geom = "area", position = "stack",
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
 \code{\link{aes_}}. If specified and \code{inherit.aes = TRUE} (the
-default), is combined with the default mapping at the top level of the
-plot. You only need to supply \code{mapping} if there isn't a mapping
-defined for the plot.}
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{data}{A data frame. If specified, overrides the default data frame
-defined at the top level of the plot.}
+\item{data}{The data to be displayed in this layer. There are three
+   options:
+
+   If \code{NULL}, the default, the data is inherited from the plot
+   data as specified in the call to \code{\link{ggplot}}.
+
+   A \code{data.frame}, or other object, will override the plot
+   data. All objects will be fortified to produce a data frame. See
+   \code{\link{fortify}} for which variables will be created.
+
+   A \code{function} will be called with a single argument,
+   the plot data. The return value must be a \code{data.frame.}, and
+   will be used as the layer data.}
 
 \item{geom}{Use to override the default Geom}
 
@@ -35,8 +45,8 @@ interval.}
 to \emph{( 1 - abs(i/m)^kopt(1) )i^kopt(2)}; (2,2)=biweight (default);
  (0,0)=uniform; (1,0)=triangle; (2,1)=Epanechnikov; (2,3)=triweight.}
 
-\item{na.rm}{If \code{FALSE} (the default), removes missing values with
-a warning.  If \code{TRUE} silently removes missing values.}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
+a warning. If \code{TRUE}, missing values are silently removed.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -47,16 +57,10 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link{borders}}.}
 
-\item{...}{other arguments passed on to \code{\link{layer}}. There are
-  three types of arguments you can use here:
-
-  \itemize{
-  \item Aesthetics: to set an aesthetic to a fixed value, like
-     \code{color = "red"} or \code{size = 3}.
-  \item Other arguments to the layer, for example you override the
-    default \code{stat} associated with the layer.
-  \item Other arguments passed on to the stat.
-  }}
+\item{...}{other arguments passed on to \code{\link{layer}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{color = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
 }
 \description{
 See \code{\link[ash]{bin1}} & \code{\link[ash]{ash1}} for more information.
@@ -65,13 +69,13 @@ See \code{\link[ash]{bin1}} & \code{\link[ash]{ash1}} for more information.
 \if{html}{
 A sample of the output from \code{stat_ash()}:
 
-\figure{stat_ash_01.png}{options: width="100\%" alt="Figure: stat_ash_01.png"}
+\figure{statash01.png}{options: width="100\%" alt="Figure: statash01.png"}
 }
 
 \if{latex}{
 A sample of the output from \code{stat_ash()}:
 
-\figure{statash01.pdf}{options: width=10cm}
+\figure{statash01.png}{options: width=10cm}
 }
 }
 \section{Aesthetics}{
@@ -94,6 +98,7 @@ are in bold):
   \item{\code{density}}{ash density estimate}
 }
 }
+
 \examples{
 # compare
 library(gridExtra)
@@ -123,4 +128,3 @@ David Scott (1992), \emph{"Multivariate Density Estimation,"}
             B. W. Silverman (1986), \emph{"Density Estimation for Statistics
             and Data Analysis,"} Chapman & Hall.
 }
-

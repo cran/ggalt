@@ -7,13 +7,13 @@
 #' \if{html}{
 #' A sample of the output from \code{geom_xspline()}:
 #'
-#' \figure{geom_xspline_01.png}{options: width="100\%" alt="Figure: geom_xspline_01.png"}
+#' \figure{geomxspline01.png}{options: width="100\%" alt="Figure: geomxspline01.png"}
 #' }
 #'
 #' \if{latex}{
 #' A sample of the output from \code{geom_xspline()}:
 #'
-#' \figure{geomxspline01.pdf}{options: width=10cm}
+#' \figure{geomxspline01.png}{options: width=10cm}
 #' }
 #'
 #' @section Aesthetics:
@@ -73,6 +73,7 @@
 #'             Designed for the End User", in \emph{Proceedings of SIGGRAPH 95},
 #'             pp. 377-386. \url{http://dept-info.labri.fr/~schlick/DOC/sig1.html}
 #' @export
+#' @family xspline implementations
 #' @examples
 #' set.seed(1492)
 #' dat <- data.frame(x=c(1:10, 1:10, 1:10),

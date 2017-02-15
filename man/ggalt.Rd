@@ -4,13 +4,11 @@
 \name{ggalt}
 \alias{ggalt}
 \alias{ggalt-package}
-\title{Extra Geoms, Stats and Coords for 'ggplot2'}
+\title{Extra Geoms, Stats, Coords, Scales & Fonts for 'ggplot2'}
 \description{
-A compendium of 'geoms', 'coords' and 'stats' for 'ggplot2' 2.0+, including
-splines, 1d and 2d densities, univariate average shifted histograms and
-a new map coordinate system based on 'PROJ.4'-based projections.
+A package containing additional geoms, coords, stats, scales & fonts
+for ggplot2 2.0+
 }
 \author{
 Bob Rudis (@hrbrmstr)
 }
-

@@ -18,12 +18,22 @@ stat_bkde2d(mapping = NULL, data = NULL, geom = "density2d",
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
 \code{\link{aes_}}. If specified and \code{inherit.aes = TRUE} (the
-default), is combined with the default mapping at the top level of the
-plot. You only need to supply \code{mapping} if there isn't a mapping
-defined for the plot.}
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{data}{A data frame. If specified, overrides the default data frame
-defined at the top level of the plot.}
+\item{data}{The data to be displayed in this layer. There are three
+   options:
+
+   If \code{NULL}, the default, the data is inherited from the plot
+   data as specified in the call to \code{\link{ggplot}}.
+
+   A \code{data.frame}, or other object, will override the plot
+   data. All objects will be fortified to produce a data frame. See
+   \code{\link{fortify}} for which variables will be created.
+
+   A \code{function} will be called with a single argument,
+   the plot data. The return value must be a \code{data.frame.}, and
+   will be used as the layer data.}
 
 \item{stat}{The statistical transformation to use on the data for this
 layer, as a string.}
@@ -49,8 +59,8 @@ estimation}
 
 \item{linemitre}{Line mitre limit (number greater than 1)}
 
-\item{na.rm}{If \code{FALSE} (the default), removes missing values with
-a warning.  If \code{TRUE} silently removes missing values.}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
+a warning. If \code{TRUE}, missing values are silently removed.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -61,16 +71,10 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link{borders}}.}
 
-\item{...}{other arguments passed on to \code{\link{layer}}. There are
-  three types of arguments you can use here:
-
-  \itemize{
-  \item Aesthetics: to set an aesthetic to a fixed value, like
-     \code{color = "red"} or \code{size = 3}.
-  \item Other arguments to the layer, for example you override the
-    default \code{stat} associated with the layer.
-  \item Other arguments passed on to the stat.
-  }}
+\item{...}{other arguments passed on to \code{\link{layer}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{color = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
 
 \item{geom}{default geom to use with this stat}
 
@@ -92,19 +96,20 @@ results with contours. This can be useful for dealing with overplotting
 \if{html}{
 A sample of the output from \code{geom_bkde2d()}:
 
-\figure{geom_bkde2d_01.png}{options: width="100\%" alt="Figure: geom_bkde2d_01.png"}
+\figure{geombkde2d01.png}{options: width="100\%" alt="Figure: geombkde2d01.png"}
 }
 
 \if{latex}{
 A sample of the output from \code{geom_bkde2d()}:
 
-\figure{geombkde2d01.pdf}{options: width=10cm}
+\figure{geombkde2d01.png}{options: width=10cm}
 }
 }
 \section{Computed variables}{
 
 Same as \code{\link{stat_contour}}
 }
+
 \examples{
 m <- ggplot(faithful, aes(x = eruptions, y = waiting)) +
        geom_point() +
@@ -135,4 +140,3 @@ d + stat_bkde2d(bandwidth=c(0.5, 0.5), geom = "point",
 \code{\link{geom_contour}} for contour drawing geom,
  \code{\link{stat_sum}} for another way of dealing with overplotting
 }
-
